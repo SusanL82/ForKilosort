@@ -1,6 +1,6 @@
 %% Convert NLX data to .dat for Kilosort.m
 
-function [RatID,RecDate] = ConvertNLXforKilosort_v5(InFolder,OutFolder,RatID,RecDate,BadChans,MakeMat)
+function [RatID,RecDate] = ConvertNLXforKilosort(InFolder,OutFolder,RatID,RecDate,BadChans,MakeMat)
 %% settings for read/write .dat file
 fs = 20000; %sampling rate
 Chunk = 10; %chunklength in minutes
@@ -24,7 +24,7 @@ if MakeMat ==1
         InFile = [InFolder,'\','CSC',num2str(GoodChans(ch)),'.ncs'];
         [~,~,samples] = readEegDataForKilosort(InFile); % gives 1D array of type double
         samples = int16(samples);
-        save([OutFolder,'\','Temp','\',RatID,'_',RecDate,'_ch',num2str(ch),'.mat'],'samples','-v7.3')
+        save([OutFolder,'\','Temp','\',RatID,'_',RecDate,'_ch',num2str(GoodChans(ch)),'.mat'],'samples','-v7.3')
     end
     
 else
@@ -67,7 +67,7 @@ disp(['chunk ',num2str(NumChunks+1),' of ',num2str(NumChunks+1)])
 if RecLen > (NumChunks*ChunkLen)
     RecLeft = RecLen-(NumChunks*ChunkLen);
     LastChunks = zeros(NumChans,RecLeft);LastChunks = int16(LastChunks); 
-    for ch = 1:NumChans
+    for ch = 1:numel(GoodChans)
         load([OutFolder,'\','Temp','\',RatID,'_',RecDate,'_ch',num2str(GoodChans(ch)),'.mat'],'samples');
         SampChunk = samples(NumChunks*ChunkLen+1:end);
         LastChunks(GoodChans(ch),:)=SampChunk';
