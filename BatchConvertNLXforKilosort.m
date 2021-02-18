@@ -17,7 +17,7 @@ disp(['file ',num2str(f),' of ',num2str(size(InFiles{1},1))])
 disp(['processing ',InFolder])
 
 %[~,~] = ConvertNLXforKilosort_v2(InFolder,OutFolder,RatID,RecDate);
-[~,~] = ConvertNLXforKilosort_v5(InFolder,OutFolder,RatID,RecDate,BadChans,MakeMat);
+[~,~] = ConvertNLXforKilosort(InFolder,OutFolder,RatID,RecDate,BadChans,MakeMat);
 disp(['completed ',InFolder])
 
 end
