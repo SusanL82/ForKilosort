@@ -1,6 +1,6 @@
 %% Convert NLX data to .dat for Kilosort.m
 
-function [RatID,RecDate] = ConvertNLXforKilosort_v6(InFolder,OutFolder,RatID,RecDate,BadChans,MakeMat)
+function [RatID,RecDate] = ConvertNLXforKilosort_v5(InFolder,OutFolder,RatID,RecDate,BadChans,MakeMat)
 %% settings for read/write .dat file
 fs = 20000; %sampling rate
 Chunk = 10; %chunklength in minutes
